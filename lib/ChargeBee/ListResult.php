@@ -32,54 +32,54 @@ class ChargeBee_ListResult implements Countable, ArrayAccess, Iterator
 	  return $this->nextOffset;
 	}
 	
-	public function count()
-	{
+    public function count(): int
+    {
 		return count($this->_items);
 	}
 	
 	//Implementation for ArrayAccess functions
-	public function offsetSet($k, $v)
-  {
+    public function offsetSet($k, $v): void
+    {
     $this->$k = $v;
   }
 
-  public function offsetExists($k)
+  public function offsetExists($k): bool
   {
     return isset($this->$k);
   }
 
-  public function offsetUnset($k)
+  public function offsetUnset($k): void
   {
     unset($this->$k);
   }
 
-  public function offsetGet($k)
+  public function offsetGet($k): mixed
   {
     return isset($this->list[$k]) ? $this->list[$k] : null;
   }
 
   //Implementation for Iterator functions
-  public function current()
+  public function current(): mixed
   {
       return $this->_items[$this->_index];
   }
 
-  public function key()
+  public function key(): mixed
   {
       return $this->_index;
   }
 
-  public function next()
+  public function next(): void
   {
       ++$this->_index;
   }
 
-  public function rewind()
+  public function rewind(): void
   {
       $this->_index = 0;
   }
 
-  public function valid()
+  public function valid(): bool
   {
       if ($this->_index < count($this->_items)) {
           return true;
